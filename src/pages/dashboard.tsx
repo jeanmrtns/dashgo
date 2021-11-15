@@ -2,12 +2,13 @@ import { Flex, SimpleGrid, Box, Text, theme } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import { Header } from "../components/Header";
 import { Sidebar } from "../components/Sidebar";
+import { Props as ApexProps } from 'react-apexcharts'
 
 const Chart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-const options = {
+const options : ApexProps = {
   chart: {
     toolbar: {
       show: false
@@ -28,21 +29,21 @@ const options = {
   },
   xaxis: {
     type: "datetime",
+    categories: [
+      '2021-03-24T00:00:00.000Z', 
+      '2021-03-26T00:00:00.000Z', 
+      '2021-03-27T00:00:00.000Z', 
+      '2021-03-28T00:00:00.000Z',
+      '2021-03-29T00:00:00.000Z',
+      '2021-03-30T00:00:00.000Z',
+      '2021-04-01T00:00:00.000Z'
+     ],
     axisBorder: {
       color: theme.colors.gray[600]
     },
     axisTicks: {
       color: theme.colors.gray[600]
     },
-    categories: [
-     '2021-03-24T00:00:00.000Z', 
-     '2021-03-26T00:00:00.000Z', 
-     '2021-03-27T00:00:00.000Z', 
-     '2021-03-28T00:00:00.000Z',
-     '2021-03-29T00:00:00.000Z',
-     '2021-03-30T00:00:00.000Z',
-     '2021-04-01T00:00:00.000Z'
-    ]
   },
   fill: {
     opacity: 0.3,
