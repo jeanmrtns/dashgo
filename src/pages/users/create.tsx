@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import {
   Box,
   Flex,
@@ -16,18 +18,18 @@ import Layout from "../../components/Layout";
 function CreateUser() {
   return (
     <Layout>
-      <Box flex="1" borderRadius={8} bg="gray.800" p="8">
+      <Box flex="1" borderRadius={8} bg="gray.800" p={["6", "8"]}>
         <Heading size="lg" fontWeight="normal">
           Criar usuário
         </Heading>
         <Divider my="6" borderColor="gray.700" />
 
-        <VStack spacing="8">
-          <SimpleGrid minChildWidth="240px" spacing="8" w="100%">
+        <VStack spacing={["6", "8"]}>
+          <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} w="100%">
             <Input label="Nome completo" name="name" />
             <Input label="E-mail" name="email" type="email" />
           </SimpleGrid>
-          <SimpleGrid minChildWidth="240px" spacing="8" w="100%">
+          <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} w="100%">
             <Input label="Senha" name="password" type="password" />
             <Input
               label="Confirmação da senha"
@@ -37,14 +39,17 @@ function CreateUser() {
           </SimpleGrid>
         </VStack>
 
-        <Flex mt="8" justify="flex-end">
+        <Flex mt={["6", "8"]} justify="flex-end">
           <HStack spacing="4">
-            <Button
-              colorScheme="whiteAlpha"
-              leftIcon={<Icon as={RiArrowLeftLine} fontSize="20" />}
-            >
-              Cancelar
-            </Button>
+            <Link href="/users" passHref>
+              <Button
+                as="a"
+                colorScheme="whiteAlpha"
+                leftIcon={<Icon as={RiArrowLeftLine} fontSize="20" />}
+              >
+                Cancelar
+              </Button>
+            </Link>
             <Button
               colorScheme="pink"
               leftIcon={<Icon as={RiSaveLine} fontSize="20" />}
