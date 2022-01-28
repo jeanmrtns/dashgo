@@ -21,39 +21,16 @@ import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { IoReload } from 'react-icons/io5';
 import Layout from "../../components/Layout";
 import { Pagination } from "../../components/Pagination";
-import { useQuery } from 'react-query';
-import { format } from "date-fns";
-
-type User = {
-  id: string;
-  email: string;
-  createdAt: string;
-}
+import { useUsers } from "../../services/hooks/useUsers";
 
 function UserList() {
 
-  const { data, error, isLoading, refetch, isFetching } = useQuery('users', async () => {
-    const response = await fetch('http://localhost:3000/api/users');
-    const data = await response.json();
-
-    const users = data.users.map((user: User) => {
-      return {
-        ...user,
-        createdAt: format(new Date(user.createdAt), 'dd/MM/yyyy')
-      }
-    });
-
-    return users;
-  })
+  const { data, error, isLoading, refetch, isFetching } = useUsers();
 
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true,
   });
-
-  async function handleRefetchUsers() {
-    await refetch({});
-  }
 
   return (
     <Layout>
@@ -71,7 +48,7 @@ function UserList() {
               as="button"
               size="sm"
               colorScheme="pink"
-              onClick={handleRefetchUsers}
+              onClick={() => refetch()}
             >
               <Icon as={IoReload} />
             </Button>
@@ -89,7 +66,7 @@ function UserList() {
           </ButtonGroup>
         </Flex>
 
-        { isLoading || isFetching ? (
+        { isLoading ? (
           <Flex justify="center">
             <Spinner />
           </Flex>
